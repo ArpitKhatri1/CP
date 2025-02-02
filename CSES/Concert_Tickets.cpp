@@ -145,35 +145,33 @@ void precompute() {
 }
  
 void solve() {
-   int n,x;
-   cin>>n>>x;
-   cin(v,n);
-   sort(v.begin(),v.end());
-   int l = 0;
-   int r = n-1;
-   int count = 0;
-   while(l<=r){
-    if(l == r){
-        count++;
-        l++;
-        r--;
-        
-    }else{
-        if(v[l] + v[r]<=x){
-        count ++;
-        l++;
-        r--;
-    }else{
-        count++;
-        r--;
-    }
-    }
-    
-} 
+   int n,m;
+   cin>>n>>m;
+   cin(a,n);
+   cin(b,m); 
+   
+   multiset<int> st;
 
-cout<<count<<endl;
+   for(auto it:a){
+    st.insert(it);
+
+   }
+
+   for(auto it:b){
+        int maxi = it;
+      auto ind = st.upper_bound(maxi);
+
+      if(ind == st.begin()){
+        cout<<-1<<endl;
+      }else{
+        ind--;
+        cout<<*ind<<endl;
+        st.erase(ind);
+      }
+   }
+
 }
- 
+
 signed main() {
     
     fastio;
