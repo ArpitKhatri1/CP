@@ -110,7 +110,6 @@ void print(T &&x, S &&...y)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) a.rbegin(), a.rend()
 #define maxe(a) *max_element(all(a))
-#define srt(a) sort(a.begin(), a.end())
 #define mine(a) *min_element(all(a))
 #define maxp(a) max_element(all(a)) - a.begin()
 #define minp(a) min_element(all(a)) - a.begin()
@@ -217,51 +216,20 @@ void precompute()
 {
 }
 
+int f(int min, vi &v, int i)
+{
+    if (i >= v.size())
+    {
+        return;
+    }
+}
+
 void solve()
 {
-    int n, x;
-    cin >> x >> n;
+    int n;
+    cin >> n;
     cin(v, n);
-
-    priority_queue<pair<int, pair<int, int>>> pq;
-    pq.push({x + 1, {0, x}});
-
-    for (int i = 0; i < n; i++)
-    {
-        vector<pair<int, pair<int, int>>> temp;
-        while (!pq.empty())
-        {
-            auto top = pq.top();
-            pq.pop();
-            cout << top.second.second << " " << v[i];
-            if (top.second.first <= v[i] && top.second.second >= v[i])
-            {
-
-                pii l = {top.second.first, v[i] - 1};
-                int lsize = l.second - l.first + 1;
-                pii r = {v[i] + 1, top.second.second};
-                int rsize = r.second - r.first + 1;
-                if (lsize > 0)
-                    pq.push({lsize, l});
-                if (rsize > 0)
-                    pq.push({rsize, r});
-                break;
-            }
-            else
-            {
-                temp.push_back(top);
-            }
-        }
-        // push back all the elemtnts
-        for (auto it : temp)
-        {
-            pq.push(it);
-        }
-
-        // display the top
-        auto top = pq.top();
-        cout << top.first << " ";
-    }
+    int ans_min = INFL;
 }
 
 signed main()
@@ -271,6 +239,7 @@ signed main()
     precompute();
 
     int tc = 1;
+
     for (int t = 1; t <= tc; t++)
     {
         // cerr << "Case #" << t << ":\n";
