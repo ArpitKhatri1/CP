@@ -110,6 +110,7 @@ void print(T &&x, S &&...y)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) a.rbegin(), a.rend()
 #define maxe(a) *max_element(all(a))
+#define srt(a) sort(a.begin(), a.end())
 #define mine(a) *min_element(all(a))
 #define maxp(a) max_element(all(a)) - a.begin()
 #define minp(a) min_element(all(a)) - a.begin()
@@ -218,6 +219,24 @@ void precompute()
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vpp v;
+    for (int i = 0; i < n; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        v.push_back({a, b});
+    }
+    srt(v);
+    int sum = 0;
+    int time = 0;
+    for (auto it : v)
+    {
+        sum += it.second - (time + it.first);
+        time += it.first;
+    }
+    cout << sum;
 }
 
 signed main()
@@ -227,7 +246,6 @@ signed main()
     precompute();
 
     int tc = 1;
-    cin >> tc;
     for (int t = 1; t <= tc; t++)
     {
         // cerr << "Case #" << t << ":\n";

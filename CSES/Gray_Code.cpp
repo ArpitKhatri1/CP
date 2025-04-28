@@ -110,6 +110,7 @@ void print(T &&x, S &&...y)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) a.rbegin(), a.rend()
 #define maxe(a) *max_element(all(a))
+#define srt(a) sort(a.begin(), a.end())
 #define mine(a) *min_element(all(a))
 #define maxp(a) max_element(all(a)) - a.begin()
 #define minp(a) min_element(all(a)) - a.begin()
@@ -215,9 +216,40 @@ ll LCM(ll a, ll b)
 void precompute()
 {
 }
+vector<string> dfs(int n)
+{
+    if (n == 1)
+    {
+        return {"0", "1"};
+    }
 
+    vector<string> temp = dfs(n - 1);
+    vector<string> newest;
+    for (auto it : temp)
+    {
+        string fresh = "0" + it;
+        newest.push_back(fresh);
+    }
+    reverse(temp.begin(), temp.end());
+    for (auto it : temp)
+    {
+        string fresh = "1" + it;
+        newest.push_back(fresh);
+    }
+    return newest;
+}
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<string> ans;
+    vector<string> holder;
+    holder = dfs(n);
+    for (auto it : holder)
+    {
+
+        cout << it << endl;
+    }
 }
 
 signed main()
@@ -227,7 +259,6 @@ signed main()
     precompute();
 
     int tc = 1;
-    cin >> tc;
     for (int t = 1; t <= tc; t++)
     {
         // cerr << "Case #" << t << ":\n";

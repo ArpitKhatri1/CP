@@ -127,6 +127,7 @@ void print(T &&x, S &&...y)
     for (auto i : a) \
         cout << i << " ";
 #define drk cout << endl;
+#define srt(a) sort(a.begin(), a.end())
 
 #define setbits(x) __builtin_popcountll(x)
 #define mid(a, b, c) ((a >= b && a <= c) || (a >= c && a <= b) ? a : (b >= a && b <= c) || (b >= c && b <= a) ? b \
@@ -218,6 +219,39 @@ void precompute()
 
 void solve()
 {
+    int n;
+    cin >> n;
+    cin(v, n);
+    int l = 1;
+    int r = 1e18;
+
+    int ans;
+
+    while (l <= r)
+    {
+        map<int, int> mpp;
+        int mid = r + (l - r) / 2;
+        vi mods;
+        for (int i = 0; i < n; i++)
+        {
+            mods.push_back(v[i] % mid);
+            mpp[v[i] % mid]++;
+        }
+        if (mpp.size() > 2)
+        {
+            r = mid - 1;
+        }
+        else if (mpp.size() == 2)
+        {
+            ans = mid;
+            break;
+        }
+        else
+        {
+            l = mid + 1;
+        }
+    }
+    cout << ans << endl;
 }
 
 signed main()

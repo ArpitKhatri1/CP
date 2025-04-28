@@ -127,6 +127,7 @@ void print(T &&x, S &&...y)
     for (auto i : a) \
         cout << i << " ";
 #define drk cout << endl;
+#define srt(a) sort(a.begin(), a.end())
 
 #define setbits(x) __builtin_popcountll(x)
 #define mid(a, b, c) ((a >= b && a <= c) || (a >= c && a <= b) ? a : (b >= a && b <= c) || (b >= c && b <= a) ? b \
@@ -218,6 +219,52 @@ void precompute()
 
 void solve()
 {
+    int n, d, k;
+    cin >> n >> d >> k;
+    vi intime[n + 1];
+    vi outtime[n + 1];
+    for (int i = 1; i <= k; i++)
+    {
+        int l, r;
+        cin >> l >> r;
+        intime[l].push_back(i);
+        outtime[r].push_back(i);
+    }
+    set<int> st;
+    for (int i = 1; i <= d; i++)
+    {
+        for (auto it : intime[i])
+        {
+            st.insert(it);
+        }
+    }
+
+    pii brother = {st.size(), 1};
+    pii mother = {st.size(), 1};
+
+    for (int i = d + 1; i <= n; i++)
+    {
+        for (auto it : intime[i])
+        {
+            st.insert(it);
+        }
+        for (auto it : outtime[i - d])
+        {
+            st.erase(it);
+        }
+
+        int size = st.size();
+        if (size > brother.first)
+        {
+            brother = {size, i - d + 1};
+        }
+        if (size < mother.first)
+        {
+            mother = {size, i - d + 1};
+        }
+    }
+
+    cout << brother.second << " " << mother.second << endl;
 }
 
 signed main()

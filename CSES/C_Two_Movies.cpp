@@ -127,6 +127,7 @@ void print(T &&x, S &&...y)
     for (auto i : a) \
         cout << i << " ";
 #define drk cout << endl;
+#define srt(a) sort(a.begin(), a.end())
 
 #define setbits(x) __builtin_popcountll(x)
 #define mid(a, b, c) ((a >= b && a <= c) || (a >= c && a <= b) ? a : (b >= a && b <= c) || (b >= c && b <= a) ? b \
@@ -216,8 +217,45 @@ void precompute()
 {
 }
 
+int getMax(vi &prefix, int target)
+{
+}
+
+bool possible(int mid, vi &a, vi &b, vi &prefixa, vi &prefixb)
+{ // mid represents required value of a/b;
+}
+
 void solve()
 {
+    int n;
+    cin >> n;
+    cin(a, n);
+    cin(b, n);
+    vi prefixa;
+    vi prefixb;
+    prefixa.push_back(a[0]);
+    prefixb.push_back(b[0]);
+    for (int i = 1; i < n; i++)
+    {
+        prefixa.push_back(prefixa[i - 1] + a[i]);
+        prefixb.push_back(prefixb[i - 1] + b[i]);
+    }
+    int l = -1 * n;
+    int r = n;
+    int ans = -1 * n;
+    while (l <= r)
+    {
+        int mid = r + (l - r) / 2;
+        if (possible(mid, a, b, prefixa, prefixb))
+        {
+            ans = mid;
+            l = mid + 1;
+        }
+        else
+        {
+            r = mid - 1;
+        }
+    }
 }
 
 signed main()

@@ -110,6 +110,7 @@ void print(T &&x, S &&...y)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) a.rbegin(), a.rend()
 #define maxe(a) *max_element(all(a))
+#define srt(a) sort(a.begin(), a.end())
 #define mine(a) *min_element(all(a))
 #define maxp(a) max_element(all(a)) - a.begin()
 #define minp(a) min_element(all(a)) - a.begin()
@@ -218,6 +219,45 @@ void precompute()
 
 void solve()
 {
+    int n, k;
+    cin >> n >> k;
+    vpp v;
+    for (int i = 0; i < n; i++)
+    {
+        int a;
+        cin >> a;
+        v.push_back({a, i + 1});
+    }
+    srt(v);
+    if (n == 1 || n == 2)
+    {
+        cout << "IMPOSSIBLE";
+        return;
+    }
+
+    for (int i = 0; i < n - 2; i++)
+    {
+        int target = k - v[i].first;
+        int l = i + 1;
+        int r = v.size() - 1;
+        while (r > l)
+        {
+            if (v[l].first + v[r].first == target)
+            {
+                cout << v[l].second << " " << v[r].second << " " << v[i].second;
+                return;
+            }
+            else if (v[l].first + v[r].first > target)
+            {
+                r--;
+            }
+            else
+            {
+                l++;
+            }
+        }
+    }
+    cout << "IMPOSSIBLE";
 }
 
 signed main()
@@ -227,7 +267,6 @@ signed main()
     precompute();
 
     int tc = 1;
-    cin >> tc;
     for (int t = 1; t <= tc; t++)
     {
         // cerr << "Case #" << t << ":\n";
